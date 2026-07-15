@@ -1,4 +1,8 @@
-﻿using System;
+﻿# Getting the UserInput and checking if it is right
+
+```cs
+
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -28,7 +32,7 @@ namespace MyQuizApp
                 Console.ResetColor();
                 Console.WriteLine($". {question.Answers[i]}");
             }
-
+            👇
             if (GetUserChoice() == question.CorrectAnserIndex)
             {
                 Console.WriteLine("Correct!");
@@ -37,8 +41,9 @@ namespace MyQuizApp
             {
                 Console.WriteLine("Incorrect");
             }
+            👆
         }
-
+        👇
         private int GetUserChoice()
         {
             Console.Write("Your anser (number):");
@@ -51,5 +56,37 @@ namespace MyQuizApp
 
             return choice - 1; // Adjust to 0 indexed array
         }
+        👆
     }
 }
+
+```
+
+```console
+     .-')                    ('-.    .-')    .-') _                            .-') _
+   .(  OO)                 _(  OO)  ( OO ). (  OO) )                          ( OO ) )
+  (_)---\_)   ,--. ,--.   (,------.(_)---\_)/     '._ ,-.-')  .-'),-----. ,--./ ,--,'
+  '  .-.  '   |  | |  |    |  .---'/    _ | |'--...__)|  |OO)( OO'  .-.  '|   \ |  |\
+ ,|  | |  |   |  | | .-')  |  |    \  :` `. '--.  .--'|  |  \/   |  | |  ||    \|  | )
+(_|  | |  |   |  |_|( OO )(|  '--.  '..`''.)   |  |   |  |(_/\_) |  |\|  ||  .     |/
+  |  | |  |   |  | | `-' / |  .--' .-._)   \   |  |  ,|  |_.'  \ |  | |  ||  |\    |
+  '  '-'  '-.('  '-'(_.-'  |  `---.\       /   |  | (_|  |      `'  '-'  '|  | \   |
+   `-----'--'  `-----'     `------' `-----'    `--'   `--'        `-----' `--'  `--'
+What is the capital of Germany
+     1. Paris
+     2. Berling
+     3. London
+     4. Madrid
+Your anser (number):2
+Correct!
+```
+
+- `while (!int.TryParse(input, out choice))` :
+  As long as this wrok the code will run .
+
+- This is not going to be how our final application is going to look like but we;re just adding  
+  These to the `DisplayQuestion` `Method` so that we can quickly check that the `GetUserChoice` `Method`  
+  Is working correctly or not.
+
+Next we're going to take care of Desining how to start the quiz correctly . ( Displaying multiple question ) .
+after each answer we given it can start with the next question
