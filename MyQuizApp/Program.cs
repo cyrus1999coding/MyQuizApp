@@ -4,7 +4,22 @@
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            Question[] questions = new Question[]
+            {
+                new Question(
+                    "What is the capital of Germany",
+                    new string[] {"Paris", "Berling","London","Madrid"},
+                    1
+                )
+            };
+
+            Quiz myQuiz = new Quiz(questions);
+
+            myQuiz.DisplayQuestion(questions[0]); 
+
+            Console.ReadLine();
+
+            Console.ReadKey();
         }
     }
 }
