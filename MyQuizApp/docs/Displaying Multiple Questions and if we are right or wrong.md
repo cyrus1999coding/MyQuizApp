@@ -1,4 +1,11 @@
-﻿using System;
+﻿# Displaying Multiple Questions and if we are right or wrong
+
+We want build another `method` that will start the quiz and handling quiz questions .
+
+```cs
+// Quiz.cs
+
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -27,7 +34,7 @@ namespace MyQuizApp
 
                 int userChoice = GetUserChoice();
 
-             
+                👇
                 if (question.IsCorrectAnswer(userChoice))
                 {
                     Console.WriteLine("Corerct!");
@@ -37,9 +44,10 @@ namespace MyQuizApp
                     //Console.WriteLine($"Worng the correct answer was: {question.CorrectAnserIndex}");
                     Console.WriteLine($"Worng the correct answer was: {question.Answers[question.CorrectAnserIndex]}");
                 }
+                👆
             }
         }
-        private void DisplayQuestion(Question question)
+        👉 public void DisplayQuestion(Question question)
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("     .-')                    ('-.    .-')    .-') _                            .-') _  \r\n   .(  OO)                 _(  OO)  ( OO ). (  OO) )                          ( OO ) ) \r\n  (_)---\\_)   ,--. ,--.   (,------.(_)---\\_)/     '._ ,-.-')  .-'),-----. ,--./ ,--,'  \r\n  '  .-.  '   |  | |  |    |  .---'/    _ | |'--...__)|  |OO)( OO'  .-.  '|   \\ |  |\\  \r\n ,|  | |  |   |  | | .-')  |  |    \\  :` `. '--.  .--'|  |  \\/   |  | |  ||    \\|  | ) \r\n(_|  | |  |   |  |_|( OO )(|  '--.  '..`''.)   |  |   |  |(_/\\_) |  |\\|  ||  .     |/  \r\n  |  | |  |   |  | | `-' / |  .--' .-._)   \\   |  |  ,|  |_.'  \\ |  | |  ||  |\\    |   \r\n  '  '-'  '-.('  '-'(_.-'  |  `---.\\       /   |  | (_|  |      `'  '-'  '|  | \\   |   \r\n   `-----'--'  `-----'     `------' `-----'    `--'   `--'        `-----' `--'  `--'   ");
@@ -66,7 +74,7 @@ namespace MyQuizApp
         }
 
         /// <summary>
-        /// Taking the User Input and check whether is valid
+        /// Taking the valid User Input 
         /// </summary>
         /// <returns>Returns the user choice as an integer</returns>
         private int GetUserChoice()
@@ -83,3 +91,76 @@ namespace MyQuizApp
         }
     }
 }
+
+```
+- 🔑 Cool thing is in the `Quiz Class` we're using the `IsCorrectAnswer` `Method` in the `Question Class`  ↓  
+  ```cs
+  // Quiz.cs
+  .
+  .
+  .
+                if (question.IsCorrectAnswer(userChoice)👈)
+                {
+                    Console.WriteLine("Corerct!");
+                }
+                else
+                {
+                    //Console.WriteLine($"Worng the correct answer was: {question.CorrectAnserIndex}");
+                    Console.WriteLine($"Worng the correct answer was: {question.Answers[question.CorrectAnserIndex]}");
+                }
+  ```
+
+  ```cs
+    // Question.cs
+
+    public bool IsCorrectAnswer(int choice)
+    {
+        return CorrectAnserIndex == choice;
+    }
+  ```
+  Which checks wheter whatever we entered as an id is correct or not .
+
+- `public void DisplayQuestion(Question question)` :  
+  Now we can make sure that we make `DisplayQuestion` `private` because we don't need to  
+  use that outside of the `Quiz` `Class`, It takes care of displaying questions in the → `StartQuiz` `Method` .  
+  🔑🔑 So we don't need to expose the `Method` to other `Classes` .
+
+```cs
+// Program.cs
+namespace MyQuizApp
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Question[] questions = new Question[]
+            {
+                new Question(
+                    "What is the capital of Germany",
+                    new string[] {"Paris", "Berling","London","Madrid"},
+                    1
+                )
+            };
+
+            Quiz myQuiz = new Quiz(questions);
+
+            //myQuiz.DisplayQuestion(questions[0]); 
+            myQuiz.StartQuiz();
+
+            Console.ReadLine();
+
+            Console.ReadKey();
+        }
+    }
+}
+
+```
+- And modify the `Program.cs` :  
+  ```cs
+    //myQuiz.DisplayQuestion(questions[0]); 
+    myQuiz.StartQuiz(); 👈
+  ```
+
+And add more questions .
+
+Now we're almost done all we have to do is to display the result .

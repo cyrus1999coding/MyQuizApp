@@ -17,6 +17,11 @@ namespace MyQuizApp
             CorrectAnserIndex = correctAnserIndex;
         }
 
+        /// <summary>
+        /// takes an integer and check the correctness
+        /// </summary>
+        /// <param name="choice">an inteter</param>
+        /// <returns>returns a boolean value</returns>
         public bool IsCorrectAnswer(int choice)
         {
             return CorrectAnserIndex == choice;
